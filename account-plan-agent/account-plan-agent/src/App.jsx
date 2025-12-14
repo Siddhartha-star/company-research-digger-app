@@ -1,22 +1,53 @@
-import React, { createContext, useContext, useReducer, useEffect, useState, useRef, useMemo } from 'react';
-import { 
-  Send, Mic, MicOff, Download, Loader2, BrainCircuit, CheckCircle, 
-  TrendingUp, Building2, Users, Target, Database, BarChart3, Activity,
-  Zap, Sparkles, Eye, Clock, Award, Edit3, MessageCircle, AlertTriangle,
-  XCircle, RefreshCw, Settings, AlertCircle, ChevronDown, ChevronUp,
-  History, Share2, Filter, BarChart, PieChart, TrendingDown, DollarSign,
-  Calendar, Link2, ExternalLink, Copy, Check, PlayCircle, Info,
-  ArrowRight, GitBranch, Layers, Terminal, Plus, Minus, Grid, Search,
-  Briefcase, MapPin, Bookmark, Bell, Volume2, FileText, Cpu, Table,
-  Shield, Star, Lightbulb, Globe, StopCircle, RotateCcw, Save, Pause,
-  Play, ChevronLeft, ChevronRight, Trash2, FolderOpen, BookOpen, Tag,
-  ThumbsUp, ThumbsDown, Brain, Workflow, Network, Newspaper, Repeat,
-  LineChart, Lock, Unlock, MessageSquare, GitCompare, AlertOctagon, Scale
+import {
+  Activity,
+  AlertTriangle,
+  ArrowRight,
+  Award,
+  BarChart,
+  Brain,
+  BrainCircuit,
+  Building2,
+  Check,
+  CheckCircle,
+  DollarSign,
+  Download,
+  Edit3,
+  ExternalLink,
+  FileText,
+  GitBranch,
+  Globe,
+  Grid,
+  History,
+  Info,
+  Lightbulb,
+  Link2,
+  Loader2,
+  Lock,
+  MessageCircle,
+  MessageSquare,
+  Mic, MicOff,
+  Network,
+  Repeat,
+  Save,
+  Scale,
+  Send,
+  Settings,
+  Share2,
+  Shield,
+  Sparkles,
+  ThumbsDown,
+  ThumbsUp,
+  TrendingDown,
+  TrendingUp,
+  Unlock,
+  Users,
+  Volume2
 } from 'lucide-react';
+import { createContext, useContext, useEffect, useMemo, useReducer, useRef, useState } from 'react';
 
 
-const GEMINI_API_KEY = "AIzaSyAgwQ-dtMK5CxGL8SI4m4jHxR1JZCn39BE";
-const USE_MOCK_MODE = false; 
+// REMOVED: Hardcoded API key - now using environment variables
+const USE_MOCK_MODE = false;
 
 const ADVANCED_FEATURES = {
   MULTI_SOURCE_VERIFICATION: true,
@@ -351,7 +382,7 @@ async function runUltraAdvancedResearch(
   if (USE_MOCK_MODE) return mockUltraAdvancedResponse(userQuery, userPersona);
 
   const persona = RESEARCH_PERSONAS[userPersona] || RESEARCH_PERSONAS.balanced;
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`;
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${import.meta.env.VITE_GEMINI_API_KEY}`;
   
   const contextPrompt = `
 CONTEXT & METADATA:
